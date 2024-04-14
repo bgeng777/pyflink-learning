@@ -1,0 +1,35 @@
+version: "1.0"
+services:
+  jobmanager:
+    image: pyflink:latest
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager        
+
+  taskmanager:
+    image: pyflink:latest
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    scale: 1
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2        
+
+  client:
+    image: pyflink-client:latest
+    depends_on:
+      - jobmanager
+      - taskmanager
+    command: /opt/flink/submit.sh
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        rest.address: jobmanager
+    scale: 1
