@@ -1,0 +1,6 @@
+
+# IDE or editor specific files
+.idea/
+.vscode/
+.project
+.pycharm/
