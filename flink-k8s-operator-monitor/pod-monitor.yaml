@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: flink-job-metrics
+  # The label is required by Prometheus. Check https://github.com/prometheus-operator/kube-prometheus/issues/1392#issuecomment-1411719953 for more details.
+  labels:
+    release: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - default
+  selector:
+    matchLabels:
+      app: basic-example
+  podMetricsEndpoints:
+    - port: metrics

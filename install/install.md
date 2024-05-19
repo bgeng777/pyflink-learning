@@ -8,20 +8,20 @@ conda activate myenv
 
 ## Check if conda works
 conda list
+conda env list
 ```
 
 ## Install PyFlink
 ```bash
-pip install --upgrade pip
-pip install --upgrade setuptools wheel
-pip install apache-flink==1.18.1
+pip install --upgrade pip setuptools wheel
+pip install apache-flink==1.19.0
 ```
 Note, it may take some time(in my Mac, it takes 20min after `export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1` and `export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1`) to build grpc-io due to the python and grpc-io version. Check this [issue](https://github.com/grpc/grpc/issues/24026) for more details.
 
 
 ## Verify a simple example
 ```bash
-python /path/to/miniconda/base/envs/myenv/lib/python3.10/site-packages/pyflink/examples/datastream/word_count.py
+python /usr/local/Caskroom/miniconda/base/envs/myenv/lib/python3.10/site-packages/pyflink/examples/datastream/word_count.py
 ```
 The output is like this:
 ```txt
